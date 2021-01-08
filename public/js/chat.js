@@ -4,7 +4,7 @@ const chatList = $("#chat-list ul");
 const username = $("#chat-list a");
 function isSiteOnline() {
   var MrChecker = new XMLHttpRequest(),
-    CheckThisUrl = "//glitchord.glitch.me";
+    CheckThisUrl = "//coffeechat.glitch.me";
 
   // Opens the file and specifies the method (get)
   // Asynchronous is true
@@ -41,6 +41,8 @@ const emotes = {
     socket.emit("createdMessage", { userID, channelID, message: "😃" }),
   "sob:": args =>
     socket.emit("createdMessage", { userID, channelID, message: "😭" }),
+  "ping:": args =>
+    socket.emit("createdMessage", { userID, channelID, message: "🏓" }),
   "glitch:": args =>
     socket.emit("createdMessage", { userID, channelID, message: "🎏" })
 };
@@ -50,7 +52,7 @@ const commands = {
     socket.emit("createdMessage", {
       userID,
       channelID,
-      message: "¯\\_(ツ)_/¯"
+      message: "¯\_(ツ)_/¯"
     }),
   dog: args =>
     socket.emit("createdMessage", { userID, channelID, message: " ▼・ᴥ・▼" }),
@@ -99,7 +101,7 @@ socket.on("connect", function() {
 function renderError(msg) {
   const div = jQuery("<div class='chat-message'></div>");
   div.html(`<div class="chat-message-content">
-      <a href="#">Bonnie</div>
+      <a href="#">Error</div>
       <div class="chat-message-message">
         <p style="color: red !important">${msg}</p>
       </div>
@@ -124,8 +126,8 @@ jQuery("#message-form").on("submit", function(e) {
       .trim()
       .split(/\s+/g);
     const command = args.shift();
-    if (!command) return renderError("Missing command input!");
-    if (!commands[command]) return renderError("Command not found!");
+    if (!command) return renderError("Missing command input");
+    if (!commands[command]) return renderError("Slash command not found");
     commands[command](args);
     return;
   }
@@ -136,8 +138,8 @@ jQuery("#message-form").on("submit", function(e) {
       .trim()
       .split(/\s+/g);
     const command = args.shift();
-    if (!command) return renderError("Missing an emote!!");
-    if (!emotes[command]) return renderError("Emote not found!");
+    if (!command) return renderError("Missing an emote");
+    if (!emotes[command]) return renderError("Emote not found");
     emotes[command](args);
     return;
   }
