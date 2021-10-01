@@ -117,7 +117,6 @@ passport.serializeUser((user, done) => {
 // used to deserialize the user
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
-    console.log(user.email); // FIXME: Remove this line when bug is fixed.
     done(err, user);
   });
 });
@@ -141,10 +140,8 @@ app.get("/suspended", function(req, res) {
 // marmota (gustavosilva-gss on github)
 // I'm just going to comment this out and do the routing of admin in its own file
 //app.get("/admin", function(req, res) {
-//  res.redirect("/");
-//  // Hello, Riverside Rocks here
-//  // I have the admin page shut off as it is public (very bad!!)
-//});
+// res.redirect("/");
+
 
 
 
