@@ -1,4 +1,4 @@
-# welcome to coffeechat
+# welcome to herokuchat (coffeechat fork)
 
 -------------
 
